@@ -1,19 +1,22 @@
 module.exports = function check(str, bracketsConfig) {
-  let brackets = new Map(bracketsConfig)
-    let res = []
-    str = str.split('')
-    for(let key = 0 ; key<str.length;key++){
-        if(str[key]!==brackets.get(res[res.length-1])){
-            res.push(str[key])
+    // объявляем объект по ключам которого будем сравнивать скобки
+    let brackets = {};
+    // объясляем масси куда будем складывать скобки
+    let stack = [];
+    let res ;
+    // заносим config в объект, где ключи явояются открывающимися скобками , азначения закрывающиеся
+    bracketsConfig.forEach(element => {
+        brackets[element[0]] = element[1]
+    });
+    for(let i = 0 ; i < str.length ; i++){
+        // проверяем есть в стеке скобка соответствующая условию,если нет заносим в стек
+        if(str[i] !== brackets[`${stack[stack.length-1]}`]){
+            stack.push(str[i])
         }
         else{
-            res.pop()
+            stack.pop()
         }
     }
-    if(res.length === 0) {
-        return true
-    }
-    else{
-        return false
-    }
+    stack.length === 0 ? res = true : res = false
+    return res
 }
