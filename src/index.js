@@ -4,7 +4,7 @@ module.exports = function check(str, bracketsConfig) {
     // объясляем массив куда будем складывать скобки
     let stack = [];
     let res ;
-    // заносим config в объект, где ключи явояются открывающимися скобками , а значения закрывающиеся
+    // заносим config в объект, где ключи являются открывающимися скобками , а значения закрывающиеся
     bracketsConfig.forEach(element => {
         brackets[element[0]] = element[1]
     });
